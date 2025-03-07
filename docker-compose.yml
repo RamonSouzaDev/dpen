@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: raindesafio-app
+    container_name: raindesafio-app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - rain-trap
+
+  nginx:
+    image: nginx:alpine
+    container_name: raindesafio-nginx
+    restart: unless-stopped
+    ports:
+      - "9000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - rain-trap
+
+  mysql:
+    image: mysql:8.0
+    container_name: raindesafio-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: rain_trap
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
+      MYSQL_USER: rain_trap
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - rain-trap
+
+networks:
+  rain-trap:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
