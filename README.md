@@ -1,5 +1,11 @@
 # Calculadora de Acúmulo de Água
 
+![image](https://github.com/user-attachments/assets/f57bdbca-eb53-463a-90b8-d0aaf9663513)
+
+
+![image](https://github.com/user-attachments/assets/956ce8ba-63d1-4690-88e0-645cb47443fc)
+
+
 Este projeto implementa uma solução para o cálculo de acúmulo de água entre silhuetas, desenvolvido em Laravel, com Docker para um ambiente de desenvolvimento consistente.
 
 ## Sobre o Problema
